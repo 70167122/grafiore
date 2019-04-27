@@ -13,3 +13,7 @@ $("#view_agregar_venta").click(function(){
         }
     });
 });
+
+function regresar(){
+    window.location.href = "./ventas";
+}

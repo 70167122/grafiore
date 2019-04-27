@@ -20,25 +20,27 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="card-box table-responsive">
+        <div class="card-box">
             <button type="button" class="btn btn-primary mb-3" id="view_agregar_venta">Agregar</button>
 
-            <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Cliente</th>
-                        <th>Fecha</th>
-                        <th>Documento</th>
-                        <th>Tipo Venta</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Documento</th>
+                            <th>Tipo Venta</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
 
-                <tbody id="contenido_ventas">
+                    <tbody id="contenido_ventas">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

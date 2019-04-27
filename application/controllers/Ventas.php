@@ -23,7 +23,10 @@ class Ventas extends CI_Controller {
     }
 
     public function new_venta(){
-        $this->load->view("ventas/new_venta");
+        $data['comprobante'] = $this->Base_model->datos("tipo_documento");
+        $data['documento'] = $this->Base_model->datos("identidad");
+        $data['tipo_venta'] = $this->Base_model->datos("tipo_venta");
+        $this->load->view("ventas/new_venta",$data);
     }
     
 }
