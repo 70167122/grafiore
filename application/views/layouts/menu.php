@@ -27,7 +27,7 @@
         <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i><span> Ventas </span> <span class="menu-arrow"></span></a>
         <ul class="list-unstyled">
             <li><a href="<?php echo base_url('ventas') ?>">Ventas</a></li>
-            <li><a href="#">Cliente</a></li>
+            <li><a href="<?php echo base_url('clientes') ?>">Clientes</a></li>
         </ul>
     </li>
 

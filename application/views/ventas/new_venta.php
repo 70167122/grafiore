@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title">Ventas </h4>
+            <h4 class="page-title">Nueva Venta </h4>
             <ol class="breadcrumb p-0 m-0">
                 <li class="breadcrumb-item">
                     <a href="#">Grafiore</a>
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label for="exampleFormControlInput1">Tipo de comprobante</label>
-                    <select name="tipo_comprobante" id="tipo_comprobante" class="form-control">
+                    <select name="tipo_comprobante" id="tipo_comprobante" class="form-control" onchange="comprobante()">
                         <option value="0">Seleccionar</option>
                         <?php foreach ($comprobante as $key => $value) { ?>
                             <option value="<?php echo $value->id_tipo_documento ?>"><?php echo $value->descripcion ?></option>
@@ -52,24 +52,24 @@
                 <div class="form-group col-md-3">
                     <label for="exampleFormControlInput1">Cliente <i class="fa fa-plus text-success"></i></label>
                     <div class="input-group">
-                        <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Buscar">
+                        <input type="text" name="document" class="form-control" id="documento_buscado" placeholder="Buscar">
                         <span class="input-group-prepend">
-                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fas fa-search"></i></button>
+                            <button type="button" class="btn waves-effect waves-light btn-primary" id="buscar" onclick="buscar()"><i class="fas fa-search"></i></button>
                         </span>
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="exampleFormControlInput1">Nombre del cliente</label>
-                    <input type="text" name="cliente" class="form-control">
+                    <input type="text" name="cliente" class="form-control" id="cliente">
                 </div>
                 <div class="form-group col-md-5">
                     <label for="exampleFormControlInput1">Dirección del cliente</label>
-                    <input type="text" name="direccion" class="form-control">
+                    <input type="text" name="direccion" class="form-control" id="direccion">
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="exampleFormControlInput1">Tipo de venta</label>
                     <select name="tipo_venta" id="" class="form-control">
                         <option value="0">Seleccionar</option>
@@ -78,7 +78,7 @@
                         <?php } ?>
                     </select>         
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="exampleFormControlInput1">Entrega</label>
                     <select name="entrega" id="" class="form-control">
                         <option value="0">Seleccionar</option>
@@ -86,15 +86,15 @@
                         <option value="2">Entregado</option>
                     </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="exampleFormControlInput1">Buscar producto</label>
-                    <input type="search" name="buscar_producto" id="buscar_producto" placeholder="Buscar producto" class="form-control">
+                    <button type="button" class="btn btn-success form-control" id="buscar_producto" onclick="buscar_producto()">Buscar <i class="fa fa-search"></i></button>
                 </div>
             </div>
             <h4>DETALLE DE LA VENTA</h4>
             <div class="row">
                 <div class="col-md-12 table-responsive">
-                    <table class="table">
+                    <table class="table" id="detalle">
                         <thead>
                             <tr>
                                 <th style="width:150px">CANT</th>
@@ -105,31 +105,8 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td contenteditable="true">1</td>
-                                <td>dfhdhdfh jfak fknakfa kfnakf</td>
-                                <td contenteditable="true">grupo grafiore</td>
-                                <td contenteditable="true">50</td>
-                                <td>50</td>
-                                <td><button type="button" class="btn btn-danger btn-sm"><i class=" mdi mdi-delete"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td contenteditable="true">1</td>
-                                <td>dfhdhdfh jfak fknakfa kfnakf</td>
-                                <td contenteditable="true">grupo grafiore</td>
-                                <td contenteditable="true">50</td>
-                                <td>50</td>
-                                <td><button type="button" class="btn btn-danger btn-sm"><i class=" mdi mdi-delete"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td contenteditable="true">1</td>
-                                <td>dfhdhdfh jfak fknakfa kfnakf</td>
-                                <td contenteditable="true">grupo grafiore</td>
-                                <td contenteditable="true">50</td>
-                                <td>50</td>
-                                <td><button type="button" class="btn btn-danger btn-sm"><i class=" mdi mdi-delete"></i></button></td>
-                            </tr>
+                        <tbody id="content_detalle">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -142,7 +119,7 @@
                         <tbody>
                             <tr>
                                 <th>Subtotal:</th>
-                                <td class="text-center">150</td>
+                                <td class="text-center" id="subtotal">150</td>
                             </tr>
                             <tr>
                                 <th>IGV:</th>
@@ -150,7 +127,7 @@
                             </tr>
                             <tr>
                                 <th>TOTAL:</th>
-                                <th class="text-center">150</th>
+                                <th class="text-center" id="total">150</th>
                             </tr>
                         </tbody>
                     </table>
@@ -163,3 +140,45 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_producto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width:55%; max-width: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm" id="products">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Elegir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carga_productos">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#products').dataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }
+    });
+</script>
