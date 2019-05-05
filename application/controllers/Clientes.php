@@ -64,10 +64,20 @@ class Clientes extends CI_Controller {
 
         $consulta = $this->Base_model->insertar("cliente",$data);
 
+        $id_cliente = $this->db->insert_id();
+
         if ($consulta) {
-            echo 1;
+            $mensajes = array(
+                "ok" => 1,
+                "id" => $id_cliente
+            );
+            echo json_encode($mensajes);
         }else{
-            echo 0;
+            $mensajes = array(
+                "ok" => 0,
+                "id" => ""
+            );
+            echo json_encode($mensajes);
         }
 
     }

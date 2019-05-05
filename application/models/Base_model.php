@@ -20,6 +20,11 @@ class Base_model extends CI_Model {
         return $res->row();
     }
 
+    public function actualizar($nombre_id,$id,$tabla,$data){
+        $this->db->where($nombre_id,$id);
+        return $this->db->update($tabla,$data);
+    }
+
     public function buscar_cliente($documento)
 	{
         $this->db->select("p.nombres,p.apellidos,p.direccion,p.telefono,p.email,p.documento_identidad,c.id_cliente,c.id_persona");

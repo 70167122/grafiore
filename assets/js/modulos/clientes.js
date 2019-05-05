@@ -74,7 +74,8 @@ $("#form-agregar").submit(function(e){
     let datos = $(this).serialize();
 
     $.post("./clientes/add",datos,function(response){
-        if (response == 1) {
+        let mensajes = JSON.parse(response);
+        if (mensajes.ok == 1) {
             alert("Se agrego correctamente");
             $("#modal_agregar").modal("hide");
             clientes();

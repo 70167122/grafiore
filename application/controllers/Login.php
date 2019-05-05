@@ -24,6 +24,7 @@ class Login extends CI_Controller {
                 "apellidos" => $consulta->apellidos,
                 "id_perfil" => $consulta->id_perfil,
                 "perfil" => $consulta->descripcion,
+                "idpersona" => $consulta->id_persona,
                 "login" => TRUE
             );
 
